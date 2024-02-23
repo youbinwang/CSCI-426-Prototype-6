@@ -1,75 +1,111 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LineSpawner : MonoBehaviour
 {
-     public GameObject circle1;
-      public GameObject circle2;
-      public GameObject line;
-      public float dotDistance = 5f;
-      private GameObject lastCircle = null;
-      private GameObject currentLine;
-  
-      private GameObject startPoint = null;
-      private GameObject endPoint = null;
-      
-      void Update()
-      {
-          if (Input.GetMouseButtonDown(0))
-          {
-              Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-              clickPosition.z = 0;
+    public GameObject circle1;
+    public GameObject circle2;
+    public GameObject[] linePrefabs;
+    public float dotDistance = 5f;
+    
+    private GameObject lastCircle = null;
+    private GameObject currentLinePrefab;
+    private GameObject currentLineInstance;
+    
+    private List<GameObject> recentObjects = new List<GameObject>();
+    
+    public SpriteRenderer previewSpriteRenderer;
 
-              if (lastCircle == null)
-              {
-                  lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
-              }
-              else
-              {
-                  float distance = Vector3.Distance(lastCircle.transform.position, clickPosition);
-                  if (distance < dotDistance)
-                  {
-                      // Clear Old Circle 1 & Circle 2 and the line
-                      ClearOldCircleAndLine();
-                      GameObject newCircle = Instantiate(circle2, clickPosition, Quaternion.identity);
-                      PlaceAndScaleLine(lastCircle.transform.position, newCircle.transform.position);
-                      startPoint = lastCircle;
-                      endPoint = newCircle;
-                      lastCircle = null;
-                  }
-                  else
-                  {
-                      Destroy(lastCircle);
-                      lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
-                  }
-              }
-          }
-      }
-      
-      void PlaceAndScaleLine(Vector3 startPosition, Vector3 endPosition)
-      {
-          if (currentLine != null) Destroy(currentLine);
+    private void Start()
+    {
+        RandomLineGenerate();
+    }
 
-          Vector3 middlePoint = (startPosition + endPosition) / 2;
-          currentLine = Instantiate(line, middlePoint, Quaternion.identity);
-      
-          float distance = Vector3.Distance(startPosition, endPosition);
-          currentLine.transform.localScale = new Vector3(distance, currentLine.transform.localScale.y, currentLine.transform.localScale.z);
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickPosition.z = 0;
+            
+            if (lastCircle == null)
+            {
+                ClearOldObjects();
+                lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
+                ChangeCircleColors(lastCircle);
+                recentObjects.Add(lastCircle);
+            }
+            else
+            {
+                float distance = Vector3.Distance(lastCircle.transform.position, clickPosition);
+                if (distance < dotDistance)
+                {
+                    GameObject newCircle = Instantiate(circle2, clickPosition, Quaternion.identity);
+                    ChangeCircleColors(newCircle);
+                    recentObjects.Add(newCircle);
+                    
+                    PlaceAndScaleLine(lastCircle.transform.position, newCircle.transform.position);
+                    lastCircle = null;
+                    RandomLineGenerate();
+                }
+
+                if (distance > dotDistance)
+                {
+                    //When Distance > dotDistance
+                    previewSpriteRenderer.color = new Color(1f, 0.22f, 0.22f);
+                }
+            }
+        }
+    }
+
+    void PlaceAndScaleLine(Vector3 startPosition, Vector3 endPosition)
+    {
+        GameObject line = Instantiate(currentLinePrefab, (startPosition + endPosition) / 2, Quaternion.identity);
+        float distance = Vector3.Distance(startPosition, endPosition);
+        line.transform.localScale = new Vector3(distance, line.transform.localScale.y, line.transform.localScale.z);
+
+        Vector3 direction = endPosition - startPosition;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        line.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        recentObjects.Add(line);
+    }
+
+    void RandomLineGenerate()
+    {
+        int index = UnityEngine.Random.Range(0, linePrefabs.Length);
+        currentLinePrefab = linePrefabs[index];
         
-          Vector3 direction = endPosition - startPosition;
-          float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-          currentLine.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-      }
-  
-      public void ClearOldCircleAndLine()
-      {
-          if (startPoint != null) Destroy(startPoint);
-          if (endPoint != null) Destroy(endPoint);
-          if (currentLine != null) Destroy(currentLine);
-        
-          startPoint = null;
-          endPoint = null;
-          currentLine = null;
-      }
+        UpdatePreviewColor();
+    }
+
+    void UpdatePreviewColor()
+    {
+        SpriteRenderer prefabRenderer = currentLinePrefab.GetComponent<SpriteRenderer>();
+        Color lineColor = prefabRenderer.color;
+        previewSpriteRenderer.color = lineColor;
+        Color previewColor = new Color(lineColor.r, lineColor.g, lineColor.b, 0.3f);
+        previewSpriteRenderer.color = previewColor;
+    }
+    
+    
+    void ChangeCircleColors(GameObject circle)
+    {
+        SpriteRenderer lineRenderer = currentLinePrefab.GetComponent<SpriteRenderer>();
+        Color lineColor = lineRenderer.color;
+
+        SpriteRenderer circleRenderer = circle.GetComponent<SpriteRenderer>();
+        circleRenderer.color = lineColor;
+    }
+
+    public void ClearOldObjects()
+    {
+        foreach (var obj in recentObjects)
+        {
+                Destroy(obj);
+        }
+        recentObjects.Clear();
+    }
 }
