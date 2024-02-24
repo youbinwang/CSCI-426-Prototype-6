@@ -32,7 +32,7 @@ public class LineSpawner : MonoBehaviour
             
             if (lastCircle == null)
             {
-                ClearOldObjects();
+                //ClearOldObjects();
                 lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
                 ChangeCircleColors(lastCircle);
                 recentObjects.Add(lastCircle);
@@ -45,7 +45,8 @@ public class LineSpawner : MonoBehaviour
                     GameObject newCircle = Instantiate(circle2, clickPosition, Quaternion.identity);
                     ChangeCircleColors(newCircle);
                     recentObjects.Add(newCircle);
-                    
+
+                    ClearOldObjects();
                     PlaceAndScaleLine(lastCircle.transform.position, newCircle.transform.position);
                     lastCircle = null;
                     RandomLineGenerate();
