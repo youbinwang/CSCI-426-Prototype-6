@@ -13,6 +13,7 @@ public class LineSpawner : MonoBehaviour
     private GameObject lastCircle = null;
     private GameObject currentLinePrefab;
     private GameObject currentLineInstance;
+    private int lastIndex = -1;
     
     private List<GameObject> recentObjects = new List<GameObject>();
     
@@ -32,7 +33,8 @@ public class LineSpawner : MonoBehaviour
             
             if (lastCircle == null)
             {
-                //ClearOldObjects();
+                ClearOldObjects();
+                
                 lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
                 ChangeCircleColors(lastCircle);
                 recentObjects.Add(lastCircle);
@@ -45,8 +47,7 @@ public class LineSpawner : MonoBehaviour
                     GameObject newCircle = Instantiate(circle2, clickPosition, Quaternion.identity);
                     ChangeCircleColors(newCircle);
                     recentObjects.Add(newCircle);
-
-                    ClearOldObjects();
+                    
                     PlaceAndScaleLine(lastCircle.transform.position, newCircle.transform.position);
                     lastCircle = null;
                     RandomLineGenerate();
@@ -81,6 +82,21 @@ public class LineSpawner : MonoBehaviour
         
         UpdatePreviewColor();
     }
+    
+    //Each Time Generate Different Line
+    // void RandomLineGenerate()
+    // {
+    //     int index;
+    //     do
+    //     {
+    //         index = UnityEngine.Random.Range(0, linePrefabs.Length);
+    //     } while (index == lastIndex);
+    //
+    //     currentLinePrefab = linePrefabs[index];
+    //     lastIndex = index;
+    //
+    //     UpdatePreviewColor();
+    // }
 
     void UpdatePreviewColor()
     {
