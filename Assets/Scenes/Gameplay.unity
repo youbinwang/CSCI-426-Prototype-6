@@ -11439,6 +11439,7 @@ MonoBehaviour:
   scoreText: {fileID: 795630486}
   ifInvisible: 0
   invisibleTime: 0
+  player: {fileID: 1576286884}
   health: 3
   score: 0
   bgm: {fileID: 313968852}

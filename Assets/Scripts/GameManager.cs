@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public bool ifInvisible = false;
     public float invisibleTime;
+    public GameObject player;
 
     public int health = 3;
     public int score = 0;
@@ -49,12 +50,17 @@ public class GameManager : MonoBehaviour
             GameEnd();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+    /*    if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             LoadNextScene(1);
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+       /* if (Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1;
+        }*/
+
+      /*  if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             LoadNextScene(2);
         }
@@ -62,7 +68,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             LoadNextScene(0);
-        }
+        }*/
     }
 
     void LoadNextScene(int index)
@@ -106,7 +112,8 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        Destroy(player);
         text.text = "GAME END!";
         backText.SetActive(true);
     }

@@ -828,7 +828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &528877645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1148,7 +1148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -435, y: -485.57}
+  m_AnchoredPosition: {x: 48, y: -485.57}
   m_SizeDelta: {x: 770.7124, y: 108.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160767336
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PRESS 1 TO Level 1
+  m_text: 'PRESS SPACE TO START
 
 '
   m_isRightToLeft: 0
@@ -1761,7 +1761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 495.97, y: 0}
+  m_AnchoredPosition: {x: 655, y: 0}
   m_SizeDelta: {x: 928.06, y: 124.8282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957366596
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Green Line - Speed +/- and Bounce
+  m_text: Green Line - Both
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
