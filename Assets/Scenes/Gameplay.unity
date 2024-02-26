@@ -1026,7 +1026,7 @@ MonoBehaviour:
   - {fileID: 524108575}
   dotDistance: 30
   previewSpriteRenderer: {fileID: 1357147728}
-  lastTime: 0
+  lastTime: 0.5
   coolDown: 0
   ifCanDraw: 1
 --- !u!1 &618232223

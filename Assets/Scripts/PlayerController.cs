@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.tag == "Coin")
         {
-            GameManager.instance.ChangeScore(1);
+            gameManager.ChangeScore(1);
             Destroy(collision.gameObject);
         }
     }
