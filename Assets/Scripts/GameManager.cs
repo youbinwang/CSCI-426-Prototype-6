@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI scoreText;
+    public bool ifInvisible = false;
+    public float invisibleTime;
 
     public int health = 3;
     public int score = 0;
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-      if (instance == null)
+      /*if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }*/
 
         UpdateHealthUI();
         UpdateScoreUI();
@@ -46,8 +48,19 @@ public class GameManager : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
-        health += amount;
-        UpdateHealthUI();
+        if (!ifInvisible)
+        {
+            ifInvisible = true;
+            health += amount;
+            UpdateHealthUI();
+            Invoke("SetIfInvisibleFalse", invisibleTime);
+        }
+     
+    }
+
+    void SetIfInvisibleFalse()
+    {
+        ifInvisible = false;
     }
 
     public void ChangeScore(int amount)
@@ -69,5 +82,6 @@ public class GameManager : MonoBehaviour
     void GameEnd()
     {
         //Time.timeScale = 0;
+        //
     }
 }

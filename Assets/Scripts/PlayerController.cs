@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
 
-    //public GameManager gameManager;
+    public GameManager gameManager;
     private Rigidbody2D rb;
     public float force;
 
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            GameManager.instance.ChangeHealth(-1);
+            gameManager.ChangeHealth(-1);
             Destroy(collision.gameObject);
         }
         

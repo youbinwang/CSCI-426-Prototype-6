@@ -438,11 +438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b9824276a18394eb8d2c263c21705a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 810489674}
   Orange: {r: 1, g: 0.69411767, b: 0.2509804, a: 1}
   Blue: {r: 0.2509804, g: 0.67058825, b: 1, a: 1}
   Red: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 322286944}
-  bounceForce: 20
+  bounceForce: 50
   acceleration: 5
 --- !u!1 &427000535
 GameObject:
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453960794}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09e65c487a2173f429fa26aa4386cd59, type: 3}
   m_Name: 
@@ -605,7 +606,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.9339623, b: 0.9339623, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1039,12 +1040,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b9824276a18394eb8d2c263c21705a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 810489674}
   Orange: {r: 1, g: 0.69411767, b: 0.2509804, a: 1}
   Blue: {r: 0.2509804, g: 0.67058825, b: 1, a: 1}
   Red: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 571999124}
-  bounceForce: 20
+  bounceForce: 50
   acceleration: 5
+--- !u!1 &587571428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 587571429}
+  - component: {fileID: 587571430}
+  m_Layer: 0
+  m_Name: ===Reload===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587571429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587571428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4490.9243, y: -1061.6273, z: -0.08441764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &587571430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587571428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f6c39c5f8a618489a66b494de17d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyCodes: 72000000
 --- !u!1 &591385106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,11 +1235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b9824276a18394eb8d2c263c21705a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 810489674}
   Orange: {r: 1, g: 0.69411767, b: 0.2509804, a: 1}
   Blue: {r: 0.2509804, g: 0.67058825, b: 1, a: 1}
   Red: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 591385108}
-  bounceForce: 20
+  bounceForce: 50
   acceleration: 5
 --- !u!1 &607535553
 GameObject:
@@ -1279,6 +1327,9 @@ MonoBehaviour:
   - {fileID: 524108575}
   dotDistance: 30
   previewSpriteRenderer: {fileID: 1357147728}
+  lastTime: 0.5
+  coolDown: 0
+  ifCanDraw: 1
 --- !u!1 &618232223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,7 +1728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 810489673}
   - component: {fileID: 810489674}
-  - component: {fileID: 810489676}
+  - component: {fileID: 810489675}
   m_Layer: 0
   m_Name: ===GameManager===
   m_TagString: Untagged
@@ -1714,10 +1765,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 1766984887}
   scoreText: {fileID: 795630486}
+  ifInvisible: 0
+  invisibleTime: 0.5
   health: 5
   score: 0
   bgm: {fileID: 1264078913}
---- !u!114 &810489676
+--- !u!114 &810489675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1726,10 +1779,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 810489672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f6c39c5f8a618489a66b494de17d38, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b280352cb8b904e8d7de23e983d36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyCodes: 72000000
+  player: {fileID: 1576286884}
+  props:
+  - {fileID: 1542034622}
+  innerRadius: 20
+  outerRadius: 20
+  sizeRangePrefab1: {x: 3, y: 3}
+  sizeRangePrefab2: {x: 5, y: 10}
+  spawnTime: 1
 --- !u!1 &842421822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,8 +1903,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1264078912}
+  m_Children: []
   m_Father: {fileID: 2035865933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1097436369
@@ -1888,12 +1947,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264078911}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1097436368}
+  m_Father: {fileID: 2035865933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1264078913
 MonoBehaviour:
@@ -2256,6 +2315,7 @@ GameObject:
   - component: {fileID: 1542034624}
   - component: {fileID: 1542034625}
   - component: {fileID: 1542034626}
+  - component: {fileID: 1542034627}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -2392,6 +2452,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1576286885}
   maxDistance: 70
+--- !u!114 &1542034627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542034622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e65ba4568c0b3748b08a2e7de52b255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 5
 --- !u!1 &1576286884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2502,7 +2575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b7f203a1ec2fa4b8b712641b5478c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 20
+  gameManager: {fileID: 810489674}
+  force: 50
 --- !u!1 &1585717457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,11 +2720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b9824276a18394eb8d2c263c21705a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 810489674}
   Orange: {r: 1, g: 0.69411767, b: 0.2509804, a: 1}
   Blue: {r: 0.2509804, g: 0.67058825, b: 1, a: 1}
   Red: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 1585717460}
-  bounceForce: 20
+  bounceForce: 50
   acceleration: 5
 --- !u!1 &1766984885
 GameObject:
@@ -3105,6 +3180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1097436368}
+  - {fileID: 1264078912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089809526
@@ -3401,3 +3477,4 @@ SceneRoots:
   - {fileID: 69073773}
   - {fileID: 453960795}
   - {fileID: 2035865933}
+  - {fileID: 587571429}

@@ -9,18 +9,18 @@ public class WallManager : MonoBehaviour
     public float switchTime;
     private void Start()
     {
-        InvokeRepeating("RandomizeProperties", switchTime, switchTime);
+        //InvokeRepeating("RandomizeProperties", switchTime, switchTime);
     }
 
-    void RandomizeProperties()
+    /*void RandomizeProperties()
     {
         List<WallProperty.Property> availableProperties = new List<WallProperty.Property>
         {
 
-            WallProperty.Property.bounce,
+           *//* WallProperty.Property.bounce,
             WallProperty.Property.bounce,
             WallProperty.Property.speedBounce,
-            WallProperty.Property.speedBounce,
+            WallProperty.Property.speedBounce,*//*
             WallProperty.Property.dangerBounce,
             WallProperty.Property.dangerBounce
         };
@@ -47,6 +47,6 @@ public class WallManager : MonoBehaviour
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
-    }
+    }*/
 }
 

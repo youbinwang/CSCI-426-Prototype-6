@@ -19,14 +19,22 @@ public class LineSpawner : MonoBehaviour
     
     public SpriteRenderer previewSpriteRenderer;
 
+    [Header("LineLimit")]
+    [SerializeField] private float lastTime;
+    [SerializeField] private float coolDown;
+    [SerializeField] private bool ifCanDraw = true;
     private void Start()
     {
-        RandomLineGenerate();
+        //RandomLineGenerate();
+        //UpdatePreviewColor();
+        int index = UnityEngine.Random.Range(0, linePrefabs.Length);
+        currentLinePrefab = linePrefabs[index];
+        UpdatePreviewColor();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && ifCanDraw)
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0;
@@ -77,9 +85,11 @@ public class LineSpawner : MonoBehaviour
 
     void RandomLineGenerate()
     {
+        ifCanDraw = false;
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
-        
+        Invoke("ClearOldObjects", lastTime);
+        Invoke("CanDraw", coolDown);
         UpdatePreviewColor();
     }
     
@@ -97,6 +107,11 @@ public class LineSpawner : MonoBehaviour
     //
     //     UpdatePreviewColor();
     // }
+    void CanDraw()
+    {
+        ifCanDraw = true;
+    }
+    
 
     void UpdatePreviewColor()
     {
