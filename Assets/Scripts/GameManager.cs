@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
         //
     }
 }
