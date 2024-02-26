@@ -12,9 +12,20 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public float force;
 
+    public GameObject enemyParticleSystem;
+    public GameObject coinParticleSystem;
+    
+    public AudioClip enemyHitSound;
+    public AudioClip coinCollectSound;
+    
+    private AudioSource audioSource;
+    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();  
+        
         if (rb != null)
         {
             ApplyRandomForce(rb);
@@ -37,12 +48,18 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             gameManager.ChangeHealth(-1);
+            GameObject psInstance = Instantiate(enemyParticleSystem.gameObject, collision.transform.position, Quaternion.identity) as GameObject;
+            psInstance.GetComponent<ParticleSystem>().Play();
+            audioSource.PlayOneShot(enemyHitSound);
             Destroy(collision.gameObject);
         }
         
         if (collision.gameObject.tag == "Coin")
         {
             gameManager.ChangeScore(1);
+            GameObject psInstance = Instantiate(coinParticleSystem.gameObject, collision.transform.position, Quaternion.identity) as GameObject;
+            psInstance.GetComponent<ParticleSystem>().Play();
+            audioSource.PlayOneShot(coinCollectSound);
             Destroy(collision.gameObject);
         }
     }

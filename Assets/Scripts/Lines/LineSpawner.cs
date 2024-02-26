@@ -18,23 +18,23 @@ public class LineSpawner : MonoBehaviour
     private List<GameObject> recentObjects = new List<GameObject>();
     
     public SpriteRenderer previewSpriteRenderer;
-
-    [Header("LineLimit")]
-    [SerializeField] private float lastTime;
-    [SerializeField] private float coolDown;
-    [SerializeField] private bool ifCanDraw = true;
+    
+    public AudioClip lineCreateSound;
+    
+    private AudioSource audioSource;
+    
     private void Start()
     {
-        //RandomLineGenerate();
-        //UpdatePreviewColor();
+        audioSource = GetComponent<AudioSource>();
+        RandomLineGenerate();
+        UpdatePreviewColor();
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
-        UpdatePreviewColor();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && ifCanDraw)
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPosition.z = 0;
@@ -73,6 +73,7 @@ public class LineSpawner : MonoBehaviour
     void PlaceAndScaleLine(Vector3 startPosition, Vector3 endPosition)
     {
         GameObject line = Instantiate(currentLinePrefab, (startPosition + endPosition) / 2, Quaternion.identity);
+        audioSource.PlayOneShot(lineCreateSound);
         float distance = Vector3.Distance(startPosition, endPosition);
         line.transform.localScale = new Vector3(distance, line.transform.localScale.y, line.transform.localScale.z);
 
@@ -85,11 +86,8 @@ public class LineSpawner : MonoBehaviour
 
     void RandomLineGenerate()
     {
-        ifCanDraw = false;
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
-        Invoke("ClearOldObjects", lastTime);
-        Invoke("CanDraw", coolDown);
         UpdatePreviewColor();
     }
     
@@ -107,10 +105,6 @@ public class LineSpawner : MonoBehaviour
     //
     //     UpdatePreviewColor();
     // }
-    void CanDraw()
-    {
-        ifCanDraw = true;
-    }
     
 
     void UpdatePreviewColor()

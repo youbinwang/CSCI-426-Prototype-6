@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,14 @@ using UnityEngine;
 public class SpeedUpLine : MonoBehaviour
 {
     public float acceleration = 5f;
+    private AudioSource audioSource;
+    public AudioClip blueLineSound;
+
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +26,7 @@ public class SpeedUpLine : MonoBehaviour
                 Vector2 newVelocity = currentVelocity * acceleration + rb.velocity;
                 rb.velocity = newVelocity;
             }
+            audioSource.PlayOneShot(blueLineSound);
         }
     }
 }

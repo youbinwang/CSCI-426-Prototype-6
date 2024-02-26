@@ -6,6 +6,17 @@ public class BounceAndSpeedUpLine : MonoBehaviour
 {
     public float bounceForce = 10f;
     public float acceleration = 5f;
+    private AudioSource audioSource;
+    public AudioClip greenLineSound;
+    
+    
+    
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -19,5 +30,6 @@ public class BounceAndSpeedUpLine : MonoBehaviour
             Vector2 newVelocity = currentVelocity * acceleration + rb.velocity;
             rb.velocity = newVelocity;
         }
+        audioSource.PlayOneShot(greenLineSound);
     }
 }
