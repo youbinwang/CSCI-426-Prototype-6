@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using MoreMountains.Feedbacks;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +13,11 @@ public class GameManager : MonoBehaviour
 
     public int health = 3;
     public int score = 0;
+    public MMF_Player bgm;
 
     private void Awake()
     {
-        if (instance == null)
+      if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -28,7 +30,12 @@ public class GameManager : MonoBehaviour
         UpdateHealthUI();
         UpdateScoreUI();
     }
-    
+
+    private void Start()
+    {
+        bgm.PlayFeedbacks();
+    }
+
     public void Update()
     {
         if (health == 0)
@@ -61,6 +68,6 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
-        
+        //Time.timeScale = 0;
     }
 }

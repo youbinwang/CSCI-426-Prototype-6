@@ -1252,6 +1252,7 @@ GameObject:
   - component: {fileID: 810489673}
   - component: {fileID: 810489674}
   - component: {fileID: 810489675}
+  - component: {fileID: 810489676}
   m_Layer: 0
   m_Name: ===GameManager===
   m_TagString: Untagged
@@ -1290,6 +1291,7 @@ MonoBehaviour:
   scoreText: {fileID: 795630486}
   health: 3
   score: 0
+  bgm: {fileID: 0}
 --- !u!114 &810489675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,6 +1312,19 @@ MonoBehaviour:
   outerRadius: 50
   sizeRangePrefab1: {x: 5, y: 15}
   sizeRangePrefab2: {x: 5, y: 10}
+--- !u!114 &810489676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810489672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f6c39c5f8a618489a66b494de17d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyCodes: 72000000
 --- !u!1 &842421822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b7f203a1ec2fa4b8b712641b5478c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 0
 --- !u!1 &1766984885
 GameObject:
   m_ObjectHideFlags: 0
