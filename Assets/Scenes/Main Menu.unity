@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 5
+  blueLineSound: {fileID: 0}
 --- !u!61 &6864187
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -801,7 +802,7 @@ Transform:
   m_GameObject: {fileID: 341807378}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -844,7 +845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -482}
+  m_AnchoredPosition: {x: 438, y: -485.57}
   m_SizeDelta: {x: 770.7124, y: 108.8627}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528877646
@@ -932,7 +933,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -1.5873871, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1147,8 +1148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -410}
-  m_SizeDelta: {x: 770.7124, y: 108.8627}
+  m_AnchoredPosition: {x: -435, y: -485.57}
+  m_SizeDelta: {x: 770.7124, y: 108.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160767336
 MonoBehaviour:
@@ -1411,6 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  orangeLineSound: {fileID: 0}
 --- !u!61 &1429944286
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1759,8 +1761,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 460, y: 9}
-  m_SizeDelta: {x: 1200, y: 200}
+  m_AnchoredPosition: {x: 495.97, y: 0}
+  m_SizeDelta: {x: 928.06, y: 124.8282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957366596
 MonoBehaviour:
@@ -1782,8 +1784,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Green Line - Speed + and Bounce in Level 1\n                  - Speed
-    - and Bounce in Level 2"
+  m_text: Green Line - Speed +/- and Bounce
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2044,6 +2045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 10
   acceleration: 5
+  greenLineSound: {fileID: 0}
 --- !u!61 &2108084766
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public MMF_Player bgm;
 
+    public TextMeshProUGUI text;
+     public GameObject backText;
+
     private void Awake()
     {
       /*if (instance == null)
@@ -103,6 +106,8 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
-        
+        Time.timeScale = 0;
+        text.text = "GAME END!";
+        backText.SetActive(true);
     }
 }
