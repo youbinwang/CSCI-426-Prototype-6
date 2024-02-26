@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/TryWallBounce.unity
+    guid: bb6dec8cf972cdd44840f2ac1609bf39
   m_configObjects: {}

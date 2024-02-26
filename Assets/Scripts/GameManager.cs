@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using MoreMountains.Feedbacks;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +45,27 @@ public class GameManager : MonoBehaviour
         {
             GameEnd();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LoadNextScene(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            LoadNextScene(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            LoadNextScene(0);
+        }
+    }
+
+    void LoadNextScene(int index)
+    {
+      
+        SceneManager.LoadScene(index);
     }
 
     public void ChangeHealth(int amount)
