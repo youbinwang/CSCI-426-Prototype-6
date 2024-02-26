@@ -9,22 +9,28 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            LoadNextScene();
+            LoadNextScene(1);
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            LoadNextScene(2);
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
     }
 
-    void LoadNextScene()
+    void LoadNextScene(int index)
     {
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        /*if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
-        }
+        }*/
+        SceneManager.LoadScene(index);
     }
 }
