@@ -1165,6 +1165,7 @@ MonoBehaviour:
   - {fileID: 1977726493}
   - {fileID: 524108575}
   dotDistance: 30
+  lastCircle: {fileID: 0}
   previewSpriteRenderer: {fileID: 1357147728}
   lastTime: 0.5
   coolDown: 0

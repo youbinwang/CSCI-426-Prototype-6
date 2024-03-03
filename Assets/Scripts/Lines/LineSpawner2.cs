@@ -10,7 +10,7 @@ public class LineSpawner2 : MonoBehaviour
     public GameObject[] linePrefabs;
     public float dotDistance = 5f;
     
-    private GameObject lastCircle = null;
+    public GameObject lastCircle = null;
     private GameObject currentLinePrefab;
     private GameObject currentLineInstance;
     private int lastIndex = -1;
@@ -25,8 +25,8 @@ public class LineSpawner2 : MonoBehaviour
     [SerializeField] private bool ifCanDraw = true;
     private void Start()
     {
-        //RandomLineGenerate();
-        //UpdatePreviewColor();
+       /* RandomLineGenerate();
+        UpdatePreviewColor();*/
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
         UpdatePreviewColor();
@@ -88,8 +88,8 @@ public class LineSpawner2 : MonoBehaviour
         ifCanDraw = false;
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
-        Invoke("ClearOldObjects", lastTime);
-        Invoke("CanDraw", coolDown);
+        //Invoke("ClearOldObjects", lastTime);
+        StartCoroutine(CanDraw());
         UpdatePreviewColor();
     }
     
@@ -107,10 +107,14 @@ public class LineSpawner2 : MonoBehaviour
     //
     //     UpdatePreviewColor();
     // }
-    void CanDraw()
+
+    IEnumerator CanDraw()
     {
+        yield return new WaitForSeconds(coolDown);
         ifCanDraw = true;
+        
     }
+    
     
 
     void UpdatePreviewColor()
