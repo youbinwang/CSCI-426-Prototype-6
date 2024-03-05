@@ -5,7 +5,7 @@ using UnityEngine;
 public class BounceAndSlowDownLine : MonoBehaviour
 {
     public float bounceForce = 10f;
-    public float acceleration = 5f;
+    public float acceleration = -5f;
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
