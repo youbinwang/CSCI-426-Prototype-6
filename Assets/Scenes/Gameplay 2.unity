@@ -1166,10 +1166,15 @@ MonoBehaviour:
   - {fileID: 524108575}
   dotDistance: 30
   lastCircle: {fileID: 0}
+  currentLinePrefab: {fileID: 0}
+  recentObjects: []
   previewSpriteRenderer: {fileID: 1357147728}
   lastTime: 0.5
   coolDown: 0
   ifCanDraw: 1
+  hasRestoreUsed: 0
+  restoredLine: {fileID: 0}
+  waitingLine: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,7 +2331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1576286885
 Transform:
   m_ObjectHideFlags: 0

@@ -113,8 +113,8 @@ public class GameManager : MonoBehaviour
     void GameEnd()
     {
         //Time.timeScale = 0;
-        Destroy(player);
+       /* Destroy(player);
         text.text = "GAME END!";
-        backText.SetActive(true);
+        backText.SetActive(true);*/
     }
 }

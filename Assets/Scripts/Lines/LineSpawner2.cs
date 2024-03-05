@@ -11,11 +11,11 @@ public class LineSpawner2 : MonoBehaviour
     public float dotDistance = 5f;
     
     public GameObject lastCircle = null;
-    private GameObject currentLinePrefab;
+    public GameObject currentLinePrefab;
     private GameObject currentLineInstance;
     private int lastIndex = -1;
     
-    private List<GameObject> recentObjects = new List<GameObject>();
+    public List<GameObject> recentObjects = new List<GameObject>();
     
     public SpriteRenderer previewSpriteRenderer;
 
@@ -23,6 +23,11 @@ public class LineSpawner2 : MonoBehaviour
     [SerializeField] private float lastTime;
     [SerializeField] private float coolDown;
     [SerializeField] private bool ifCanDraw = true;
+
+    [Header("Restore")]
+    public bool hasRestoreUsed; 
+    public GameObject restoredLine;
+    public GameObject waitingLine;
     private void Start()
     {
        /* RandomLineGenerate();
@@ -58,7 +63,16 @@ public class LineSpawner2 : MonoBehaviour
                     
                     PlaceAndScaleLine(lastCircle.transform.position, newCircle.transform.position);
                     lastCircle = null;
-                    RandomLineGenerate();
+                    if (waitingLine == null)
+                    {
+                        RandomLineGenerate();
+                    }
+
+                    else if(restoredLine !=null && waitingLine != null)
+                    {
+                        waitingLine = null;
+                        RandomLineGenerate();
+                    }
                 }
 
                 if (distance > dotDistance)
@@ -66,8 +80,47 @@ public class LineSpawner2 : MonoBehaviour
                     //When Distance > dotDistance
                     previewSpriteRenderer.color = new Color(1f, 0.22f, 0.22f);
                 }
+/*
+                if(restoredLine != null && waitingLine != null)
+                {
+                    
+                    waitingLine = currentLinePrefab;
+                   
+                }*/
+
+               if (restoredLine == null && waitingLine != null)
+                {
+                    if (!hasRestoreUsed)
+                    {
+                        hasRestoreUsed = true;
+                    }
+
+                    else
+                    {
+                        waitingLine = null;
+                        /*ClearOldObjects();*/
+                        RandomLineGenerate();
+                    }
+                   
+                }
+
+              
             }
+
+            if(restoredLine == null && waitingLine != null && hasRestoreUsed)
+            {
+                currentLinePrefab = waitingLine;
+                UpdatePreviewColor();
+            }
+
+            if (restoredLine != null && waitingLine == null)
+            {
+                waitingLine = currentLinePrefab;
+            }
+
         }
+
+        SwitchLine();
     }
 
     void PlaceAndScaleLine(Vector3 startPosition, Vector3 endPosition)
@@ -92,6 +145,13 @@ public class LineSpawner2 : MonoBehaviour
         StartCoroutine(CanDraw());
         UpdatePreviewColor();
     }
+
+    void WaitingLineGenerate()
+    {
+        currentLinePrefab = waitingLine;
+        StartCoroutine(CanDraw());
+        UpdatePreviewColor();
+    }
     
     //Each Time Generate Different Line
     // void RandomLineGenerate()
@@ -107,6 +167,50 @@ public class LineSpawner2 : MonoBehaviour
     //
     //     UpdatePreviewColor();
     // }
+
+    private void SwitchLine()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (restoredLine == null)
+            {
+                restoredLine = currentLinePrefab;
+                hasRestoreUsed = false;
+                ClearOldObjects();
+
+                if (/*!hasRestored && */waitingLine == null)
+                {
+                    RandomLineGenerate();
+                    waitingLine = currentLinePrefab;
+                    //hasRestored = true;
+
+
+                }
+
+                else 
+                {
+                    WaitingLineGenerate();
+                }
+                
+
+            }
+
+            
+           
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && restoredLine != null)
+        {
+            currentLinePrefab = restoredLine;
+            restoredLine = null;
+            ClearOldObjects();
+            UpdatePreviewColor(); 
+
+
+
+
+        }
+    }
 
     IEnumerator CanDraw()
     {
