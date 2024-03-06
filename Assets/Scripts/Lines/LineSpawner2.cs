@@ -19,6 +19,8 @@ public class LineSpawner2 : MonoBehaviour
     
     public SpriteRenderer previewSpriteRenderer;
 
+    public Transform circle2Position;
+
     [Header("LineLimit")]
     [SerializeField] private float lastTime;
     [SerializeField] private float coolDown;
@@ -28,6 +30,9 @@ public class LineSpawner2 : MonoBehaviour
     public bool hasRestoreUsed; 
     public GameObject restoredLine;
     public GameObject waitingLine;
+    [SerializeField] private GameObject showLine;
+    private SpriteRenderer showLineRender;
+    private Color showLineColor;
     private void Start()
     {
        /* RandomLineGenerate();
@@ -35,6 +40,10 @@ public class LineSpawner2 : MonoBehaviour
         int index = UnityEngine.Random.Range(0, linePrefabs.Length);
         currentLinePrefab = linePrefabs[index];
         UpdatePreviewColor();
+        showLineRender = showLine.GetComponent<SpriteRenderer>();
+        showLineColor = showLineRender.color;
+        showLineColor.a = 0;
+        showLineRender.color = showLineColor;
     }
 
     void Update()
@@ -47,6 +56,7 @@ public class LineSpawner2 : MonoBehaviour
             if (lastCircle == null)
             {
                 ClearOldObjects();
+                 circle2Position = null;
                 
                 lastCircle = Instantiate(circle1, clickPosition, Quaternion.identity);
                 ChangeCircleColors(lastCircle);
@@ -58,6 +68,7 @@ public class LineSpawner2 : MonoBehaviour
                 if (distance < dotDistance)
                 {
                     GameObject newCircle = Instantiate(circle2, clickPosition, Quaternion.identity);
+                    circle2Position = newCircle.transform;
                     ChangeCircleColors(newCircle);
                     recentObjects.Add(newCircle);
                     
@@ -119,6 +130,8 @@ public class LineSpawner2 : MonoBehaviour
             }
 
         }
+
+        ChangeLineUI();
 
         SwitchLine();
     }
@@ -209,6 +222,22 @@ public class LineSpawner2 : MonoBehaviour
 
 
 
+        }
+    }
+
+    private void ChangeLineUI()
+    {
+        if(restoredLine != null)
+        {
+            Color restoredColor = restoredLine.GetComponent<SpriteRenderer>().color;
+            showLine.GetComponent<SpriteRenderer>().color = restoredColor;
+        }
+        else
+        {
+            SpriteRenderer showLineRenderer = showLine.GetComponent<SpriteRenderer>();
+            Color color = showLineRenderer.color; 
+            color.a = 0f;
+            showLineRenderer.color = color; 
         }
     }
 

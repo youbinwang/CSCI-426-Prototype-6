@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Coin")
         {
             gameManager.ChangeScore(1);
-            GameObject psInstance = Instantiate(coinParticleSystem.gameObject, collision.transform.position, Quaternion.identity) as GameObject;
+          /*  GameObject psInstance = Instantiate(coinParticleSystem.gameObject, collision.transform.position, Quaternion.identity) as GameObject;
             psInstance.GetComponent<ParticleSystem>().Play();
-            audioSource.PlayOneShot(coinCollectSound);
+            audioSource.PlayOneShot(coinCollectSound);*/
             Destroy(collision.gameObject);
         }
     }
